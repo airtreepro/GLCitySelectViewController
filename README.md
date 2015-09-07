@@ -21,10 +21,13 @@ GLCitySelectViewController
 * 初始化`GLCitySelectViewController`，遵从协议`GLCitySelectViewControllerDeleage`实现代理方法
 ```
 @protocol GLCitySelectViewControllerDeleage <NSObject>
+
 /** 定位成功回代理方法 */
 - (NSString *)locationCityDesCityOfSelectViewController:(GLCitySelectViewController *)citySelectViewController updateLocationWithLocationCity:(id)LocationCity;
+
 /** 为GLCitySelectViewController提供城市列表数据的代理方法 */
 - (void)citySelectViewController:(GLCitySelectViewController *)citySelectViewController getDataWithCompletionHandler:(void (^)(GLCityModel *data))completion;
+
 /** 点击城市的代理方法 */
 - (BOOL)citySelectViewController:(GLCitySelectViewController *)citySelectViewController didSelectCity:(id)selectCity locationCity:(id)locationCity;
 
@@ -33,4 +36,4 @@ GLCitySelectViewController
 ```
 期待
 -----------------------
-* 如果在使用过程中遇到BUG，希望你能Issues我，谢谢
+* 如果在使用过程中遇到BUG，希望你能Issues我，谢谢！
