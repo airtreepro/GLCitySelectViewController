@@ -22,7 +22,7 @@ GLCitySelectViewController
 ```
 @protocol GLCitySelectViewControllerDeleage <NSObject>
 
-/** 定位成功回代理方法 */
+/** 定位成功代理方法 */
 - (NSString *)locationCityDesCityOfSelectViewController:(GLCitySelectViewController *)citySelectViewController updateLocationWithLocationCity:(id)LocationCity;
 
 /** 为GLCitySelectViewController提供城市列表数据的代理方法 */
