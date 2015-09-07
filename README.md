@@ -5,5 +5,5 @@ The easy ViewController to select city.<br/>
 
 
 ### 如何使用GLCitySelectViewController
-手动导入：将    GLCitySelect文件夹中的所有文件拽入项目中<br/>
-导入头文件    GLCitySelectViewController.h，    GLGlobal.h
+    手动导入：将GLCitySelect文件夹中的所有文件拽入项目中<br/>
+    导入头文件GLCitySelectViewController.h， GLGlobal.h
