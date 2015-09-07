@@ -13,9 +13,9 @@ GLCitySelectViewController
 * 使您的城市模型遵守协议`GLCityModelProperty`，具有下面三个必须的属性<br>
 ```
 @protocol GLCityModelProperty <NSObject>
-@property (nonatomic, strong)NSString *cityName;
-@property (nonatomic, strong)NSString *province;
-@property (nonatomic, strong)NSString *pinyin;
+@property (nonatomic, strong)NSString *cityName;//城市名
+@property (nonatomic, strong)NSString *province;//城市所属省名
+@property (nonatomic, strong)NSString *pinyin;//城市名拼音
 @end
 ```
 * 初始化`GLCitySelectViewController`，遵从协议`GLCitySelectViewControllerDeleage`实现代理方法
