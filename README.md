@@ -11,10 +11,10 @@ GLCitySelectViewController
     * 导入头文件`GLCitySelectViewController.h`， `GLGlobal.h`
 * 城市模型遵守协议`GLCityModelProperty`<br>
 ```
-@protocol GLCityModelProperty <NSObject>
-@property (nonatomic, strong)NSString *cityName;
-@property (nonatomic, strong)NSString *province;
-@property (nonatomic, strong)NSString *pinyin;
-@end
+      @protocol GLCityModelProperty <NSObject>
+      @property (nonatomic, strong)NSString *cityName;
+      @property (nonatomic, strong)NSString *province;
+      @property (nonatomic, strong)NSString *pinyin;
+      @end
 ```
 * 初始化`GLCitySelectViewController`，遵从协议`GLCitySelectViewControllerDeleage`
