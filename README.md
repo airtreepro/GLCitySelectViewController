@@ -1,5 +1,5 @@
 GLCitySelectViewController
-============================================
+-----------------------------------------
 The easy ViewController to select city.<br/>
 用法简单地城市选择控制器
 
