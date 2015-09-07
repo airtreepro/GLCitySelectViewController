@@ -847,7 +847,7 @@ typedef enum
     NSUInteger index = 0;
     for (GLCity *item in _recentCityDataArray)
     {
-        if (item.cityStatus == city.cityStatus)
+        if ([item.cityName isEqualToString:city.cityName])
         {
             index = [_recentCityDataArray indexOfObject:item];
             isSame = YES;

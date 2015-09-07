@@ -150,7 +150,7 @@
     
     _cityName = [selectCity valueForKeyPath:@"cityName"];
     
-    if (![_cityName isEqualToString:@"上海"] && ![_cityName isEqualToString:@"广州"]) {//不是上海广州时可以跳转
+    if (![_cityName isEqualToString:@"北京"]) {//不是上海广州时可以跳转
         return YES;
     } else {//广州上海不能跳转
         [MBProgressHUD showError:@"该城市未开通" toView:[UIApplication sharedApplication].keyWindow];

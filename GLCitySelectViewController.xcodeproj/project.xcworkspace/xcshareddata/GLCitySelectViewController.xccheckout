@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>F68B50B7-7DAC-4EC4-AD0B-1A07F2705B75</string>
+	<key>IDESourceControlProjectName</key>
+	<string>GLCitySelectViewController</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>151D7453CE644C4FD2336962D57B365C0D47A517</key>
+		<string>https://github.com/airtreepro/GLCitySelectViewController.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>GLCitySelectViewController.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>151D7453CE644C4FD2336962D57B365C0D47A517</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/airtreepro/GLCitySelectViewController.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>151D7453CE644C4FD2336962D57B365C0D47A517</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>151D7453CE644C4FD2336962D57B365C0D47A517</string>
+			<key>IDESourceControlWCCName</key>
+			<string>GLCitySelectViewController</string>
+		</dict>
+	</array>
+</dict>
+</plist>
