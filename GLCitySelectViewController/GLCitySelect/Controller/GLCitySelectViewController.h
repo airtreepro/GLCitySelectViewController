@@ -49,8 +49,8 @@
 ///** default is Yes */
 //@property (nonatomic, assign) BOOL showSearchBar;
 //
-///** default is Yes */
-//@property (nonatomic, assign) BOOL showLocationCell;
+/** default is Yes 暂时无法使用 */
+@property (nonatomic, assign) BOOL showLocationCell;
 //
 /** default is Yes */
 @property (nonatomic, assign) BOOL showRecentCityCell;

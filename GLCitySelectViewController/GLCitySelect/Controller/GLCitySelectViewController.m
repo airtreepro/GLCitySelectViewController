@@ -81,12 +81,16 @@ typedef enum
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        _hotCityDataArray = [NSMutableArray array];
-        _allCityDataArray = [NSMutableArray array];
-        _recentCityDataArray = [NSMutableArray array];
+        _hotCityDataArray     = [NSMutableArray array];
+        _allCityDataArray     = [NSMutableArray array];
+        _recentCityDataArray  = [NSMutableArray array];
         _firstLetterKeysArray = [NSMutableArray array];
-        _citiesDictionary = [NSMutableDictionary dictionary];
-        _locationCity = [[GLCity alloc] init];
+        _citiesDictionary     = [NSMutableDictionary dictionary];
+        _locationCity         = [[GLCity alloc] init];
+        
+        _showLocationCell   = YES;
+        _showRecentCityCell = YES;
+        _showHotCityCell    = YES;
         
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(locationUpdated:) name:kLocationCityChangeNotification object:nil];
     }
@@ -330,8 +334,12 @@ typedef enum
     }
     
     //    //热门城市
-    [_firstLetterKeysArray addObject:@"*"];
-    [_citiesDictionary setObject:_hotCityDataArray forKey:@"*"];
+    
+    if (_showHotCityCell) {
+        [_firstLetterKeysArray addObject:@"*"];
+        [_citiesDictionary setObject:_hotCityDataArray forKey:@"*"];
+    }
+    
     [self makeDictionaryFromArray:_allCityDataArray];
     [_cityListTableView reloadData];
     
@@ -540,6 +548,22 @@ typedef enum
 }
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    NSMutableArray *titleArray = [NSMutableArray array];
+    
+    
+    if (_showLocationCell) {
+        [titleArray addObject:@"定位城市"];
+    }
+    
+    if (_showRecentCityCell) {
+        [titleArray addObject:@"最近浏览城市"];
+    }
+    
+    if (_showHotCityCell) {
+        [titleArray addObject:@"热门城市"];
+    }
+    
+    
     if (tableView == _cityListTableView) {
         UILabel* titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 25)];
         titleLabel.backgroundColor = RGB(206, 206,206);
@@ -547,43 +571,10 @@ typedef enum
         titleLabel.font = [UIFont systemFontOfSize:15];
         NSString *title = nil;
         
-        if (_isRecentDataExits>0)
-        {
-            if (section == 0)
-            {
-                title = @"定位城市";
-            }
-            else if (section == 1)
-            {
-                title = @"最近浏览城市";
-            }
-            else if(section == 2)
-            {
-                title = @"热门城市";
-            }
-            else
-            {
-                if ([[_firstLetterKeysArray objectAtIndex:section] isEqualToString:@"~"])
-                {
-                    title = @"其他";
-                }
-                else
-                {
-                    title = [_firstLetterKeysArray objectAtIndex:section];
-                }
-            }
-        }
-        else
-        {
-            if (section == 0)
-            {
-                title = @"定位城市";
-            }
-            else if(section == 1)
-            {
-                title = @"热门城市";
-            }
-            else if ([[_firstLetterKeysArray objectAtIndex:section] isEqualToString:@"~"])
+        if (section < titleArray.count) {
+            title = titleArray[section];
+        } else {
+            if ([[_firstLetterKeysArray objectAtIndex:section] isEqualToString:@"~"])
             {
                 title = @"其他";
             }
@@ -592,6 +583,7 @@ typedef enum
                 title = [_firstLetterKeysArray objectAtIndex:section];
             }
         }
+        
         titleLabel.text = [NSString stringWithFormat:@"  %@",title];
         return titleLabel;
     }
@@ -602,13 +594,19 @@ typedef enum
 {
     if (tableView==_cityListTableView) {
         if (_isRecentDataExits>0) {
-            if (indexPath.section==2) {
-                return kHeightForHotCityCell;
+            
+            if (_showHotCityCell) {
+                if (indexPath.section==2) {
+                    return kHeightForHotCityCell;
+                }
             }
         }else{
-            if (indexPath.section==1) {
-                return kHeightForHotCityCell;
-            }
+            
+            if (_showHotCityCell) {
+                if (indexPath.section==1) {
+                    return kHeightForHotCityCell;
+                }
+            } 
         }
     }
     return kHeightForSingleCityCell;
@@ -734,12 +732,25 @@ typedef enum
     }
     if (tableView == _cityListTableView){
         if (_isRecentDataExits>0) {
-            if (section<3) {
-                return 1;
+            if (_showHotCityCell) {
+                if (section<3) {
+                    return 1;
+                }
+            } else {
+                if (section < 2) {
+                    return 1;
+                }
             }
+            
         }else{
-            if (section<2) {
-                return 1;
+            if (_showHotCityCell) {
+                if (section<2) {
+                    return 1;
+                }
+            } else {
+                if (section < 1) {
+                    return 1;
+                }
             }
         }
         int rowsCount = [[_citiesDictionary objectForKey:[_firstLetterKeysArray objectAtIndex:section]] count];
@@ -772,17 +783,32 @@ typedef enum
     if(tableView==_cityListTableView){
         int cityCellType = -1;
         if (_isRecentDataExits>0) {
-            if (indexPath.section==1) {
-                cityCellType = GLCityCellTypeRecentCity;
-            }else if(indexPath.section==2){
-                cityCellType = GLCityCellTypeHotCity;
-            }else{
-                cityCellType = GLCityCellTypeCommonCity;
+            
+            if (_showHotCityCell) {
+                if (indexPath.section==1) {
+                    cityCellType = GLCityCellTypeRecentCity;
+                }else if(indexPath.section==2){
+                    cityCellType = GLCityCellTypeHotCity;
+                }else{
+                    cityCellType = GLCityCellTypeCommonCity;
+                }
+            } else {
+                if (indexPath.section==1) {
+                    cityCellType = GLCityCellTypeRecentCity;
+                } else{
+                    cityCellType = GLCityCellTypeCommonCity;
+                }
             }
+            
         }else{
-            if (indexPath.section==1) {
-                cityCellType = GLCityCellTypeHotCity;
-            }else{
+            
+            if (_showHotCityCell) {
+                if (indexPath.section==1) {
+                    cityCellType = GLCityCellTypeHotCity;
+                }else{
+                    cityCellType = GLCityCellTypeCommonCity;
+                }
+            } else {
                 cityCellType = GLCityCellTypeCommonCity;
             }
         }
