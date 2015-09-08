@@ -299,7 +299,10 @@ typedef enum
     {
         city.cityName = @"正在定位中";
         city.cityStatus = GLCityLocating;
-        [[[GLLocationCityManager shareInstance]class] reObtainLocation];
+        
+        if (_showLocationCell) {
+            [[[GLLocationCityManager shareInstance]class] reObtainLocation];
+        }
     }
     
     NSMutableArray *locCityArray = [NSMutableArray arrayWithObject:city];
@@ -558,7 +561,7 @@ typedef enum
         [titleArray addObject:@"定位城市"];
     }
     
-    if (_showRecentCityCell) {
+    if (_showRecentCityCell && _isRecentDataExits) {
         [titleArray addObject:@"最近浏览城市"];
     }
     
