@@ -34,6 +34,10 @@ GLCitySelectViewController
 @end
 
 ```
+效果图：
+------------
+![](https://raw.githubusercontent.com/airtreepro/GLCitySelectViewController/master/GLCitySelectViewController/example.gif)
+
 期待
 -----------------------
 * 如果在使用过程中遇到BUG，希望你能Issues我，谢谢！
