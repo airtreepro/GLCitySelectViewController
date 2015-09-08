@@ -61,15 +61,8 @@ typedef enum
         _titleLabel.textColor = kOrangeTextColor;
         [_titleLabel sizeToFit];
         _titleLabel.centerY = self.contentView.centerY;
-//        if (_city.hasCinema) {
-//            _tipLabel.hidden = YES;
-//        }else{
-//            _tipLabel.hidden = NO;
-//            _tipLabel.left = _titleLabel.right+5;
-//        }
-
-            _tipLabel.hidden = YES;
-            _tipLabel.left = _titleLabel.right+5;
+        _tipLabel.hidden = YES;
+        _tipLabel.left = _titleLabel.right+5;
     }
 }
 

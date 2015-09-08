@@ -303,9 +303,12 @@ typedef enum
     }
     
     NSMutableArray *locCityArray = [NSMutableArray arrayWithObject:city];
-    [_firstLetterKeysArray addObject:@"#"];
-    [_citiesDictionary setObject:locCityArray forKey:@"#"];
     
+    if (_showLocationCell) {
+        [_firstLetterKeysArray addObject:@"#"];
+        [_citiesDictionary setObject:locCityArray forKey:@"#"];
+    }
+
     //最近浏览
     if (_showRecentCityCell) {
         NSData *tmpData = [GLHelper requestDataOfCacheWithFolderName:kCityRecentfolder prefix:@"city" subfix:@"recentlyCity"];
@@ -593,20 +596,39 @@ typedef enum
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView==_cityListTableView) {
-        if (_isRecentDataExits>0) {
-            
-            if (_showHotCityCell) {
-                if (indexPath.section==2) {
-                    return kHeightForHotCityCell;
+        
+        if (_showLocationCell) {
+            if (_isRecentDataExits>0) {
+                
+                if (_showHotCityCell) {
+                    if (indexPath.section==2) {
+                        return kHeightForHotCityCell;
+                    }
+                }
+            }else{
+                
+                if (_showHotCityCell) {
+                    if (indexPath.section==1) {
+                        return kHeightForHotCityCell;
+                    }
+                } 
+            }
+        } else {
+            if (_isRecentDataExits>0) {
+                
+                if (_showHotCityCell) {
+                    if (indexPath.section==1) {
+                        return kHeightForHotCityCell;
+                    }
+                }
+            }else{
+                
+                if (_showHotCityCell) {
+                    if (indexPath.section==0) {
+                        return kHeightForHotCityCell;
+                    }
                 }
             }
-        }else{
-            
-            if (_showHotCityCell) {
-                if (indexPath.section==1) {
-                    return kHeightForHotCityCell;
-                }
-            } 
         }
     }
     return kHeightForSingleCityCell;
@@ -696,7 +718,7 @@ typedef enum
     }
 }
 
-#pragma UITableViewDatasource
+#pragma mark - UITableViewDatasource
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
     if (tableView == _cityListTableView)
@@ -764,10 +786,11 @@ typedef enum
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+
     if (indexPath.section==0 && indexPath.row==0) {
         for (UIView* subView in tableView.subviews) {
             if ([subView.description hasPrefix:@"<UITableViewIndex"]) {
-                
+                    
                 if ([subView respondsToSelector:@selector(setTintColor:)]) {
                     subView.tintColor =RGB(72, 72, 72);
                 }
@@ -782,36 +805,69 @@ typedef enum
     NSArray* cityArray = _citiesDictionary[_firstLetterKeysArray[indexPath.section]];
     if(tableView==_cityListTableView){
         int cityCellType = -1;
-        if (_isRecentDataExits>0) {
-            
-            if (_showHotCityCell) {
-                if (indexPath.section==1) {
-                    cityCellType = GLCityCellTypeRecentCity;
-                }else if(indexPath.section==2){
-                    cityCellType = GLCityCellTypeHotCity;
-                }else{
-                    cityCellType = GLCityCellTypeCommonCity;
+        
+        if (_showLocationCell) {
+            if (_isRecentDataExits>0) {
+                if (_showHotCityCell) {
+                    if (indexPath.section==1) {
+                        cityCellType = GLCityCellTypeRecentCity;
+                    }else if(indexPath.section==2){
+                        cityCellType = GLCityCellTypeHotCity;
+                    }else{
+                        cityCellType = GLCityCellTypeCommonCity;
+                    }
+                } else {
+                    if (indexPath.section==1) {
+                        cityCellType = GLCityCellTypeRecentCity;
+                    } else{
+                        cityCellType = GLCityCellTypeCommonCity;
+                    }
                 }
-            } else {
-                if (indexPath.section==1) {
-                    cityCellType = GLCityCellTypeRecentCity;
-                } else{
+                
+            }else{
+                
+                if (_showHotCityCell) {
+                    if (indexPath.section==1) {
+                        cityCellType = GLCityCellTypeHotCity;
+                    }else{
+                        cityCellType = GLCityCellTypeCommonCity;
+                    }
+                } else {
                     cityCellType = GLCityCellTypeCommonCity;
                 }
             }
-            
-        }else{
-            
-            if (_showHotCityCell) {
-                if (indexPath.section==1) {
-                    cityCellType = GLCityCellTypeHotCity;
-                }else{
+        } else {
+            if (_isRecentDataExits>0) {
+                if (_showHotCityCell) {
+                    if (indexPath.section==0) {
+                        cityCellType = GLCityCellTypeRecentCity;
+                    }else if(indexPath.section==1){
+                        cityCellType = GLCityCellTypeHotCity;
+                    }else{
+                        cityCellType = GLCityCellTypeCommonCity;
+                    }
+                } else {
+                    if (indexPath.section==0) {
+                        cityCellType = GLCityCellTypeRecentCity;
+                    } else{
+                        cityCellType = GLCityCellTypeCommonCity;
+                    }
+                }
+                
+            }else{
+                
+                if (_showHotCityCell) {
+                    if (indexPath.section==0) {
+                        cityCellType = GLCityCellTypeHotCity;
+                    }else{
+                        cityCellType = GLCityCellTypeCommonCity;
+                    }
+                } else {
                     cityCellType = GLCityCellTypeCommonCity;
                 }
-            } else {
-                cityCellType = GLCityCellTypeCommonCity;
             }
         }
+        
         if (cityCellType==GLCityCellTypeCommonCity) {
             commonCell = [tableView dequeueReusableCellWithIdentifier:commonIdentify];
             if (!commonCell) {
@@ -837,6 +893,10 @@ typedef enum
                 commonCell.tipLabel.hidden = YES;
             }else{
                 [commonCell setStatus:NO];
+            }
+            
+            if (!_showLocationCell && indexPath.section == 0) {
+                [commonCell setTitleColor:[UIColor blackColor]];
             }
             
             return commonCell;
