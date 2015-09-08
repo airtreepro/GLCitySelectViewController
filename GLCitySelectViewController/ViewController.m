@@ -16,6 +16,8 @@
 @interface ViewController ()<GLCitySelectViewControllerDeleage>{
     
     NSString *_cityName;
+    UISwitch *_recentSwitch;
+    UISwitch *_hotSwitch;
 }
 
 @end
@@ -29,6 +31,8 @@
     [self initWelcomeLabel];
     
     [self initNavLeftButton];
+    
+    [self initSubViews];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -64,9 +68,33 @@
     
 }
 
+- (void)initSubViews {
+    UILabel *recentLabel = [[UILabel alloc] init];
+    recentLabel.text = @"显示最近浏览城市:";
+    recentLabel.frame = CGRectMake(10, 74, 200, 30);
+    [self.view addSubview:recentLabel];
+    
+    _recentSwitch = [[UISwitch alloc] init];
+    _recentSwitch.on = YES;
+    _recentSwitch.frame = CGRectMake(210, 74, 50, 30);
+    [self.view addSubview:_recentSwitch];
+    
+    UILabel *hotLabel = [[UILabel alloc] init];
+    hotLabel.text = @"显示热门城市:";
+    hotLabel.frame = CGRectMake(10, 114, 200, 30);
+    [self.view addSubview:hotLabel];
+    
+    _hotSwitch = [[UISwitch alloc] init];
+    _hotSwitch.on = YES;
+    _hotSwitch.frame = CGRectMake(210, 114, 50, 30);
+    [self.view addSubview:_hotSwitch];
+}
+
 - (void)goSelectCityViewController {
     
     GLCitySelectViewController *citySelectedVC = [[GLCitySelectViewController alloc] init];
+    citySelectedVC.showRecentCityCell = _recentSwitch.on;
+    citySelectedVC.showHotCityCell = _hotSwitch.on;
     citySelectedVC.delegate = self;
     citySelectedVC.hidesBottomBarWhenPushed = YES;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:citySelectedVC];

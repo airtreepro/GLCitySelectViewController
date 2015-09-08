@@ -260,20 +260,27 @@ typedef enum
             [allCityDataArray addObject:city];
         }
         
-        NSMutableArray *hotCityDataArray = [NSMutableArray array];
-        
-        for (int i = 0; i < citysModel.hotcity.count; i ++) {
-            id obj = citysModel.hotcity[i];
-            GLCity *city = [[GLCity alloc] init];
-            city.cityName = [obj valueForKeyPath:@"cityName"];
-            city.pinyin = [obj valueForKeyPath:@"pinyin"];
-            city.province = [obj valueForKeyPath:@"province"];
-            city.cityStatus = 0;
-            [hotCityDataArray addObject:city];
+        [_allCityDataArray addObjectsFromArray:allCityDataArray];
+
+        if (_showHotCityCell) {
+            
         }
         
-        [_allCityDataArray addObjectsFromArray:allCityDataArray];
-        [_hotCityDataArray addObjectsFromArray:hotCityDataArray];
+        if (_showHotCityCell) {
+            NSMutableArray *hotCityDataArray = [NSMutableArray array];
+            
+            for (int i = 0; i < citysModel.hotcity.count; i ++) {
+                id obj = citysModel.hotcity[i];
+                GLCity *city = [[GLCity alloc] init];
+                city.cityName = [obj valueForKeyPath:@"cityName"];
+                city.pinyin = [obj valueForKeyPath:@"pinyin"];
+                city.province = [obj valueForKeyPath:@"province"];
+                city.cityStatus = 0;
+                [hotCityDataArray addObject:city];
+            }
+            
+            [_hotCityDataArray addObjectsFromArray:hotCityDataArray];
+        }
     }
     
     //设置首字母
@@ -294,31 +301,34 @@ typedef enum
     NSMutableArray *locCityArray = [NSMutableArray arrayWithObject:city];
     [_firstLetterKeysArray addObject:@"#"];
     [_citiesDictionary setObject:locCityArray forKey:@"#"];
+    
     //最近浏览
-    NSData *tmpData = [GLHelper requestDataOfCacheWithFolderName:kCityRecentfolder prefix:@"city" subfix:@"recentlyCity"];
-    NSMutableArray *r = [NSKeyedUnarchiver unarchiveObjectWithData:tmpData];
-    if (!r)
-    {
-        _isRecentDataExits = NO;
-    }
-    else
-    {
-        if ([r count] > 1)
+    if (_showRecentCityCell) {
+        NSData *tmpData = [GLHelper requestDataOfCacheWithFolderName:kCityRecentfolder prefix:@"city" subfix:@"recentlyCity"];
+        NSMutableArray *r = [NSKeyedUnarchiver unarchiveObjectWithData:tmpData];
+        if (!r)
         {
-            [_recentCityDataArray setArray:r];
-            [_firstLetterKeysArray addObject:@"$"];
-            NSMutableArray *t = [NSMutableArray arrayWithArray:r];
-            [t removeObjectAtIndex:0];
-            [_citiesDictionary setObject:t forKey:@"$"];
-            _isRecentDataExits = YES;
-        }
-        else if ([r count] == 1)
-        {
-            [_recentCityDataArray setArray:r];
             _isRecentDataExits = NO;
         }
+        else
+        {
+            if ([r count] > 1)
+            {
+                [_recentCityDataArray setArray:r];
+                [_firstLetterKeysArray addObject:@"$"];
+                NSMutableArray *t = [NSMutableArray arrayWithArray:r];
+                [t removeObjectAtIndex:0];
+                [_citiesDictionary setObject:t forKey:@"$"];
+                _isRecentDataExits = YES;
+            }
+            else if ([r count] == 1)
+            {
+                [_recentCityDataArray setArray:r];
+                _isRecentDataExits = NO;
+            }
+        }
     }
-    //
+    
     //    //热门城市
     [_firstLetterKeysArray addObject:@"*"];
     [_citiesDictionary setObject:_hotCityDataArray forKey:@"*"];
@@ -907,5 +917,6 @@ typedef enum
     [titleView addSubview:titleLabel];
     self.navigationItem.titleView = titleView;
 }
+
 
 @end

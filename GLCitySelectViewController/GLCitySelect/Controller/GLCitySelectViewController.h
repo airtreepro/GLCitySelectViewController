@@ -52,11 +52,11 @@
 ///** default is Yes */
 //@property (nonatomic, assign) BOOL showLocationCell;
 //
-///** default is Yes */
-//@property (nonatomic, assign) BOOL showRecentCityCell;
+/** default is Yes */
+@property (nonatomic, assign) BOOL showRecentCityCell;
 //
-///** default is Yes */
-//@property (nonatomic, assign) BOOL showHotCityCell;
+/** default is Yes */
+@property (nonatomic, assign) BOOL showHotCityCell;
 
 @property (nonatomic, weak) id <GLCitySelectViewControllerDeleage> delegate;
 

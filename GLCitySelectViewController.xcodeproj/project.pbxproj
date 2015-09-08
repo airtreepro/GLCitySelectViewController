@@ -71,6 +71,7 @@
 		39A040F61B9466D1008DF01C /* NSDictionary+GLAdditional.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A040F51B9466D1008DF01C /* NSDictionary+GLAdditional.m */; };
 		39A041001B9472EC008DF01C /* MBProgressHUD+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A040FD1B9472EC008DF01C /* MBProgressHUD+Add.m */; };
 		39A041011B9472EC008DF01C /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A040FF1B9472EC008DF01C /* MBProgressHUD.m */; };
+		39A42F031B9EFB0E002D131D /* example.gif in Resources */ = {isa = PBXBuildFile; fileRef = 39A42F021B9EFB0E002D131D /* example.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -180,6 +181,7 @@
 		39A040FD1B9472EC008DF01C /* MBProgressHUD+Add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Add.m"; sourceTree = "<group>"; };
 		39A040FE1B9472EC008DF01C /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		39A040FF1B9472EC008DF01C /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		39A42F021B9EFB0E002D131D /* example.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = example.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,6 +233,7 @@
 				39771F911B9709390042C4A1 /* GLCityExampleModel.m */,
 				39A03FDA1B944377008DF01C /* Main.storyboard */,
 				39A03FF61B944E17008DF01C /* city.plist */,
+				39A42F021B9EFB0E002D131D /* example.gif */,
 				39A03FDD1B944377008DF01C /* Images.xcassets */,
 				39A03FDF1B944377008DF01C /* LaunchScreen.xib */,
 				39A03FD01B944377008DF01C /* Supporting Files */,
@@ -529,6 +532,7 @@
 				39A040911B944E5E008DF01C /* load_tip2@2x.png in Resources */,
 				39A040A01B944E5E008DF01C /* stroll_btn_sel@3x.png in Resources */,
 				39A03FDC1B944377008DF01C /* Main.storyboard in Resources */,
+				39A42F031B9EFB0E002D131D /* example.gif in Resources */,
 				39A040951B944E5E008DF01C /* load_tip4@2x.png in Resources */,
 				39A03FF71B944E17008DF01C /* city.plist in Resources */,
 				39A0409A1B944E5E008DF01C /* load_tip6@3x.png in Resources */,
