@@ -79,7 +79,6 @@
     
     GLCity *cityModel= [[GLCity alloc] init];
     cityModel.cityName = city;
-//    cityModel.hasCinema = YES;
     
     if (city && ![city isEqualToString:@""]) {
         

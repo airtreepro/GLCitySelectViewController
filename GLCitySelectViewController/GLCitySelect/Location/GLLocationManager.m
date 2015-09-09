@@ -127,7 +127,7 @@ NSString * const GLLocationManagerNotificationErrorInfoKey = @"kErrorKey";
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {    switch (status) {
     case kCLAuthorizationStatusNotDetermined:
         if ([_userLocationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
-            [_userLocationManager requestAlwaysAuthorization];
+//            [_userLocationManager requestAlwaysAuthorization];
         }
         break;
     default:
@@ -281,10 +281,13 @@ NSString * const GLLocationManagerNotificationErrorInfoKey = @"kErrorKey";
     }
     
     //反地理编码
-    // 开始反向编码
+    [self geocoderWithNewLocation:newLocation andOldLocation:oldLocation];
+}
+
+- (void)geocoderWithNewLocation:(CLLocation *)newLocation andOldLocation:(CLLocation *)oldLocation {
     [[[CLGeocoder alloc] init] reverseGeocodeLocation:newLocation completionHandler:^(NSArray *placemarks, NSError *error) {
         if (error || placemarks.count == 0) {//失败
-            
+            [self geocoderWithNewLocation:newLocation andOldLocation:oldLocation];
         } else { // 编码成功（找到了具体的位置信息）
             // 输出查询到的所有地标信息
             NSString *city = nil;
@@ -293,12 +296,17 @@ NSString * const GLLocationManagerNotificationErrorInfoKey = @"kErrorKey";
                 city = addressDictionary[@"State"];
                 city = [city stringByReplacingOccurrencesOfString:@"市" withString:@""];
             }
-            
-            
-            NSDictionary *inforDict = [NSDictionary dictionaryWithObjectsAndKeys:newLocation,
-                                       GLLocationManagerNotificationLocationUserInfoKey,
-                                       oldLocation,
-                                       GLLocationManagerNotificationLocationUserInfoKeyOldLocation, city, GLLocationManagerNotificationLocationUserInfoKeyCity, nil];
+           
+            NSMutableDictionary *inforDict = [NSMutableDictionary dictionary];
+            if (newLocation) {
+              [inforDict setObject:newLocation forKey:GLLocationManagerNotificationLocationUserInfoKey];
+            }
+            if (oldLocation) {
+              [inforDict setObject:oldLocation forKey:GLLocationManagerNotificationLocationUserInfoKeyOldLocation];
+            }
+            if (city) {
+              [inforDict setObject:city forKey:GLLocationManagerNotificationLocationUserInfoKeyCity];
+            }
             
             //userInfo != nil: newLocation and oldLocation is returned in userInfo
             //attention: oldLocation may be nil, so I use dictionaryWithObjectsAndKeys instead of @{}.
