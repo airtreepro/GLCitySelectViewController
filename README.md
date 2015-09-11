@@ -35,8 +35,21 @@ GLCitySelectViewController
 
 ```
 效果图：
-------------
-![](https://raw.githubusercontent.com/airtreepro/GLCitySelectViewController/master/GLCitySelectViewController/example.gif)
+![](https://raw.githubusercontent.com/airtreepro/GLCitySelectViewController/master/GLCitySelectViewController/example_basic.gif)
+
+* 通过属性隐藏不需要的模块和功能
+```
+/** 显示定位模块，默认Yes */
+@property (nonatomic, assign) BOOL showLocationCell;
+
+/** 显示最近选择城市模块，默认Yes */
+@property (nonatomic, assign) BOOL showRecentCityCell;
+
+/** 显示热门城市模块，默认Yes */
+@property (nonatomic, assign) BOOL showHotCityCell;
+```
+效果图
+![](https://raw.githubusercontent.com/airtreepro/GLCitySelectViewController/master/GLCitySelectViewController/example_show.gif)
 
 期待
 -----------------------
