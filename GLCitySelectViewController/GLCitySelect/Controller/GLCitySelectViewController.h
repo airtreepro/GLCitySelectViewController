@@ -46,16 +46,16 @@
 
 @interface GLCitySelectViewController : GLBaseViewController
 
-///** default is Yes */
+/** default is Yes */
 //@property (nonatomic, assign) BOOL showSearchBar;
-//
-/** default is Yes 暂时无法使用 */
+
+/** 显示定位模块，默认Yes */
 @property (nonatomic, assign) BOOL showLocationCell;
-//
-/** default is Yes */
+
+/** 显示最近选择城市模块，默认Yes */
 @property (nonatomic, assign) BOOL showRecentCityCell;
-//
-/** default is Yes */
+
+/** 显示热门城市模块，默认Yes */
 @property (nonatomic, assign) BOOL showHotCityCell;
 
 @property (nonatomic, weak) id <GLCitySelectViewControllerDeleage> delegate;

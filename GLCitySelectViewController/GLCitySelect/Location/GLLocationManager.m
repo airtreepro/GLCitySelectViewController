@@ -123,7 +123,6 @@ NSString * const GLLocationManagerNotificationErrorInfoKey = @"kErrorKey";
     //    }
 }
 
-
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {    switch (status) {
     case kCLAuthorizationStatusNotDetermined:
         if ([_userLocationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {

@@ -177,7 +177,7 @@
     
     NSString *des = @"";
     
-    if ([cityName isEqualToString:@"北京"]) {//城市开通了业务
+    if ([cityName isEqualToString:@""]) {//城市开通了业务
         des = @"(该城市未开通业务)";
     } else {
         des = @"";
@@ -191,7 +191,7 @@
     
     _cityName = [selectCity valueForKeyPath:@"cityName"];
     
-    if (![_cityName isEqualToString:@"北京"]) {//不是上海广州时可以跳转
+    if (![_cityName isEqualToString:@""]) {//不是上海广州时可以跳转
         return YES;
     } else {//广州上海不能跳转
         [MBProgressHUD showError:@"该城市未开通" toView:[UIApplication sharedApplication].keyWindow];

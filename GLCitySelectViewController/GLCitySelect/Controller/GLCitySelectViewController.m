@@ -973,6 +973,7 @@ typedef enum
     [GLHelper cacheRequestData:[NSKeyedArchiver archivedDataWithRootObject:_recentCityDataArray] folderName:kCityRecentfolder prefix:@"city" subfix:@"recentlyCity"];
     
     if ([self selectCityModel2Delegate]) {
+        [self.view endEditing:YES];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
