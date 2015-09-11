@@ -34,7 +34,7 @@ GLCitySelectViewController
 @end
 
 ```
-效果图：
+效果图：<br>
 ![](https://raw.githubusercontent.com/airtreepro/GLCitySelectViewController/master/GLCitySelectViewController/example_basic.gif)
 
 * 通过属性隐藏不需要的模块和功能
@@ -48,7 +48,7 @@ GLCitySelectViewController
 /** 显示热门城市模块，默认Yes */
 @property (nonatomic, assign) BOOL showHotCityCell;
 ```
-效果图
+效果图:<br>
 ![](https://raw.githubusercontent.com/airtreepro/GLCitySelectViewController/master/GLCitySelectViewController/example_show.gif)
 
 期待
